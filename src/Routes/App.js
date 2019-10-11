@@ -40,12 +40,14 @@ function App() {
     }
 
     // Detect partner based on URL Fragment
+    const url = window.location.href
+    const query = new URLSearchParams(window.location.search)
     useEffect(() => {
-        const url = window.location.href
         let checkLocalHostStart = url.indexOf('/') + 2
         let checkLocalHostEnd = checkLocalHostStart + 9
         let partner
         let hash = new URL(url).hash
+        
         if (hash === '' && url.substring(checkLocalHostStart, checkLocalHostEnd) === 'localhost') {
             partner = 'localhost'
         } else {   
@@ -67,32 +69,48 @@ function App() {
         // Set favicon
         let link = document.querySelector('link[rel="shortcut icon"]') ||
         document.querySelector('link[rel="icon"]');
-
         if (!link) {
             link = document.createElement('link');
             link.id = 'favicon';
             link.rel = 'shortcut icon';
             document.head.appendChild(link);
         }
-
         link.href = id.favicon
+
+
+        // Adding support for query parameters
+        let dest
+        context.active ? dest = context.account : dest = query.get('dest')
+
+        let destCurrency
+        console.log(id.destCurrency)
+        id.destCurrency !== undefined ? destCurrency = id.destCurrency : destCurrency = query.get('destCurrency')
+
+        let sourceAmount
+        id.sourceAmount !== undefined ? sourceAmount = id.sourceAmount : sourceAmount = query.get('sourceAmount')
+
+        let paymentMethod
+        id.paymentMethod !== undefined ? paymentMethod = id.paymentMethod : paymentMethod = query.get('paymentMethod')
 
         // Set page title
         if (document.title !== id.name) {
             document.title = id.name;
         }
 
+        // Instantiate widget
         let widget = null
         function init() {
             // debit card
             if (window.Wyre !== undefined) {
                 widget = new window.Wyre({
                     accountId: accountId,
-                    env: 'test',
+                    env: 'prod',
                     operation: {
                         type: 'debitcard',
-                        dest: context.account,
-                        destCurrency: id.currency
+                        dest: dest,
+                        destCurrency: destCurrency,
+                        sourceAmount: sourceAmount,
+                        paymentMethod: paymentMethod
                     }
                 });
         
@@ -139,7 +157,7 @@ function App() {
                     position: 'fixed',
                     overflow: 'hidden',
                     alignItems: 'center',
-                    background: 'url(' + id.background + ')',
+                    backgroundImage: 'url(' + id.background + ')',
                     filter: filter,
                     backgroundRepeat: 'no-repeat',
                     backgroundSize: 'cover',

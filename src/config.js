@@ -41,7 +41,7 @@ export const partners = {
         background: ExampleBackground, // Import your background
         logo: ExampleLogo, // Import your logo
         favicon: ExampleFavicon, // Import your favicon
-        currency: 'ETH', // Optional. Locks in a currency for purchase. Options are 'BTC', 'ETH', 'DAI', or 'USDC'
+        destCurrency: 'ETH', // Optional. Locks in a currency for purchase. Options are 'BTC', 'ETH', 'DAI', or 'USDC'
         blurred: true
     },
     localhost: {
@@ -50,7 +50,7 @@ export const partners = {
         background: ExampleBackground,
         logo: ExampleLogo,
         favicon: ExampleFavicon,
-        currency: 'ETH',
+        destCurrency: 'ETH',
         blurred: true
     },
     metamask: {
@@ -97,7 +97,7 @@ export const partners = {
         background: LolliBackground,
         logo: LolliLogo,
         favicon: LolliFavicon,
-        currency: 'BTC',
+        destCurrency: 'BTC',
         blurred: true
     },
     'compound-finance': {
@@ -112,7 +112,7 @@ export const partners = {
         background: CelsiusBackground,
         logo: CelsiusLogo,
         favicon: CelsiusFavicon,
-        currency: 'BTC',
+        destCurrency: 'BTC',
         blurred: false  
     },
     joule: {
@@ -120,7 +120,7 @@ export const partners = {
         background: JouleBackground,
         logo: JouleLogo,
         favicon: JouleFavicon,
-        currency: 'BTC',
+        destCurrency: 'BTC',
         blurred: true
     }
 }
