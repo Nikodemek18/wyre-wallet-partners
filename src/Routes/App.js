@@ -92,6 +92,9 @@ function App() {
         let paymentMethod
         id.paymentMethod !== undefined ? paymentMethod = id.paymentMethod : paymentMethod = query.get('paymentMethod')
 
+        let redirectUrl
+        id.redirectUrl !== undefined ? redirectUrl = id.redirectUrl : redirectUrl = query.get('redirectUrl')
+
         // Set page title
         if (document.title !== id.name) {
             document.title = id.name;

@@ -24,7 +24,7 @@ Deployment:
 7) Finally, confirm with the Wyre team who will review your pull request. Once your pull request is merged, your landing page will be live at https://partners.sendwyre.com/#[your-landing-page].
 
 # Using query parameters
-Query parameters can be passed into any landing page, and the widget will autopopulate with the query parameters as long as:
+Optionally, query parameters can be passed into any landing page, and the widget will autopopulate with the query parameters as long as:
 - The query parameters do not attempt to override a default setting of the landing page
 - The query parameters do not attempt to override a user web3 wallet connected to the landing page
 
@@ -33,6 +33,7 @@ The following query parameters are accepted:
 - `destCurrency`: populates the cryptocurrency to buy field in the widget
 - `dest`: populates the destination address of the currency to purchase
 - `paymentMethod`: populates the payment method. You may use `apple-pay` or `google-pay`
+- `redirectUrl`: the redirect Url to receive updates on the payment status
 
 Note - query parameters must come *before* the anchor tag in the url
 
