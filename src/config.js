@@ -8,7 +8,7 @@ import BinanceBackground from './Assets/PartnerBackgrounds/binance-background.pn
 import LolliBackground from './Assets/PartnerBackgrounds/lolli-background.png'
 import CompoundFinanceBackground from './Assets/PartnerBackgrounds/compound-finance-background.png'
 import CelsiusBackground from './Assets/PartnerBackgrounds/celsius-background.png'
-import JouleBackground from './Assets/PartnerBackgrounds/JouleBackground.png'
+import JouleBackground from './Assets/PartnerBackgrounds/joule-background.png'
 
 // Import your logo here
 import ExampleLogo from './Assets/PartnerLogos/meta-mask-logo.png'
@@ -20,7 +20,7 @@ import BinanceLogo from './Assets/PartnerLogos/binance-logo.svg'
 import LolliLogo from './Assets/PartnerLogos/lolli-logo.png'
 import CompoundFinanceLogo from './Assets/PartnerLogos/compound-finance-logo.png'
 import CelsiusLogo from './Assets/PartnerLogos/celsius-logo.png'
-import JouleLogo from './Assets/ParnterLogos/joule-logo.png'
+import JouleLogo from './Assets/PartnerLogos/joule-logo.png'
 
 // Import your favicon here
 import ExampleFavicon from './Assets/PartnerFavicons/wyre-favicon.ico'
@@ -32,7 +32,7 @@ import BinanceFavicon from './Assets/PartnerFavicons/binance-favicon.ico'
 import LolliFavicon from './Assets/PartnerFavicons/lolli-favicon.ico'
 import CompoundFinanceFavicon from './Assets/PartnerFavicons/compound-finance-favicon.ico'
 import CelsiusFavicon from './Assets/PartnerFavicons/celsius-favicon.ico'
-import JouleFavicon from './Assets/PartnersFavicons/joule-favicon.ico'
+import JouleFavicon from './Assets/PartnerFavicons/joule-favicon.ico'
 
 export const partners = {
     example: { // define your object in all lowercase letters
