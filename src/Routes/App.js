@@ -13,13 +13,6 @@ function App() {
         verifyScriptUrl
     );
 
-    let accountId
-    if (id.accountID !== undefined) {
-        accountId = id.accountId
-    } else {
-        accountId = 'AC_HH3W2H9UV6D'
-    }
-
     let filter
     if (id.blurred) {
         filter = 'blur(5px) brightness(0.9)'
@@ -79,6 +72,15 @@ function App() {
 
 
         // Adding support for query parameters
+        let accountId
+        if ( id.accountId !== undefined ) {
+            accountId = id.accountId
+        } else if ( query.get('accountId') !== undefined ) {
+            accountId = query.get('accountId')
+        } else {
+            accountId = 'AC_HH3W2H9UV6D'
+        }
+
         let dest
         context.active ? dest = context.account : dest = query.get('dest')
 
