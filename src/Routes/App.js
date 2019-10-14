@@ -73,9 +73,11 @@ function App() {
 
         // Adding support for query parameters
         let accountId
+        console.log(id.accountId)
+        console.log(query.get('accountId'))
         if ( id.accountId !== undefined ) {
             accountId = id.accountId
-        } else if ( query.get('accountId') !== undefined ) {
+        } else if ( query.get('accountId') !== undefined &&  query.get('accountId') !== null) {
             accountId = query.get('accountId')
         } else {
             accountId = 'AC_HH3W2H9UV6D'
@@ -85,7 +87,6 @@ function App() {
         context.active ? dest = context.account : dest = query.get('dest')
 
         let destCurrency
-        console.log(id.destCurrency)
         id.destCurrency !== undefined ? destCurrency = id.destCurrency : destCurrency = query.get('destCurrency')
 
         let sourceAmount
