@@ -12,6 +12,7 @@ node {
     try {
         try {
             stage('Setup') {
+                sh "sudo apt-get install build-essentials"
                 properties([pipelineTriggers([[$class: "GitHubPushTrigger"]])])
                 properties([[$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '20']]]);
                 checkout scm
