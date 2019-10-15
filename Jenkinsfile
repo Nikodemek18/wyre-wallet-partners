@@ -7,7 +7,7 @@ node {
 
     env.NODEJS_HOME = "${tool 'node12'}"
     env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
-    sh 'npm --version'
+    sh 'npm --version && node --version'
 
     try {
         try {
