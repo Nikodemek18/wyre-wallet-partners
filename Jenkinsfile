@@ -5,6 +5,10 @@ node {
     def softFailTests=false
     def skiptests=true //skipTestsBranches.contains(env.BRANCH_NAME)
 
+    env.NODEJS_HOME = "${tool 'node12'}"
+    env.PATH="${env.NODEJS_HOME}/bin:${env.PATH}"
+    sh 'npm --version'
+
     try {
         try {
             stage('Setup') {
