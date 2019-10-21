@@ -73,8 +73,6 @@ function App() {
 
         // Adding support for query parameters
         let accountId
-        console.log(id.accountId)
-        console.log(query.get('accountId'))
         if ( id.accountId !== undefined ) {
             accountId = id.accountId
         } else if ( query.get('accountId') !== undefined &&  query.get('accountId') !== null) {
@@ -152,7 +150,6 @@ function App() {
         }
     }
     const selectedClasses = `${classes['widget-header']} ${classes['text-white']} ${classes['widget-body']}`
-
     return (  
         <>
             <div 
