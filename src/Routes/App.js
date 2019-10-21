@@ -1,8 +1,7 @@
 import React, {useState, useEffect } from 'react'
 import { useWeb3Context } from 'web3-react';
-import {getIdFromWallet} from './../config'
+import {getIdFromPartner} from './../config'
 import WalletConnectQRCodeModal from "@walletconnect/qrcode-modal";
-import Logo from './../Assets/PartnerLogos/binance-logo.svg'
 import {useScript} from './../Hooks'
 
 function App() {
@@ -13,6 +12,11 @@ function App() {
     const [loaded, error] = useScript(
         verifyScriptUrl
     );
+
+    let filter
+    if (id.blurred) {
+        filter = 'blur(5px) brightness(0.9)'
+    }
 
     // If they're using wallet connect
     if (context.active && context.connectorName === "WalletConnect") {
@@ -28,19 +32,21 @@ function App() {
         }
     }
 
-    // Detect partner based on URL
+    // Detect partner based on URL Fragment
+    const url = window.location.href
+    const query = new URLSearchParams(window.location.search)
     useEffect(() => {
-        const url = window.location.href
         let checkLocalHostStart = url.indexOf('/') + 2
         let checkLocalHostEnd = checkLocalHostStart + 9
-        let wallet
-        let pathname = new URL(url).pathname
-        if (pathname === '/' && url.substring(checkLocalHostStart, checkLocalHostEnd) === 'localhost') {
-            wallet = 'localhost'
+        let partner
+        let hash = new URL(url).hash
+        
+        if (hash === '' && url.substring(checkLocalHostStart, checkLocalHostEnd) === 'localhost') {
+            partner = 'localhost'
         } else {   
-            wallet = pathname.substring(1, pathname.length)
+            partner = hash.substring(1, hash.length)
         }
-        let res = getIdFromWallet(wallet)
+        let res = getIdFromPartner(partner)
         setId(res)
     }, [id])
 
@@ -51,17 +57,66 @@ function App() {
         }
     }, [id])
 
-    // Instantiate the widget
+    // Instantiate the widget and partner-branded page
     useEffect(() => {
+        // Set favicon
+        let link = document.querySelector('link[rel="shortcut icon"]') ||
+        document.querySelector('link[rel="icon"]');
+        if (!link) {
+            link = document.createElement('link');
+            link.id = 'favicon';
+            link.rel = 'shortcut icon';
+            document.head.appendChild(link);
+        }
+        link.href = id.favicon
+
+
+        // Adding support for query parameters
+        let accountId
+        console.log(id.accountId)
+        console.log(query.get('accountId'))
+        if ( id.accountId !== undefined ) {
+            accountId = id.accountId
+        } else if ( query.get('accountId') !== undefined &&  query.get('accountId') !== null) {
+            accountId = query.get('accountId')
+        } else {
+            accountId = 'AC_HH3W2H9UV6D'
+        }
+
+        let dest
+        context.active ? dest = context.account : dest = query.get('dest')
+
+        let destCurrency
+        id.destCurrency !== undefined ? destCurrency = id.destCurrency : destCurrency = query.get('destCurrency')
+
+        let sourceAmount
+        id.sourceAmount !== undefined ? sourceAmount = id.sourceAmount : sourceAmount = query.get('sourceAmount')
+
+        let paymentMethod
+        id.paymentMethod !== undefined ? paymentMethod = id.paymentMethod : paymentMethod = query.get('paymentMethod')
+
+        let redirectUrl
+        id.redirectUrl !== undefined ? redirectUrl = id.redirectUrl : redirectUrl = query.get('redirectUrl')
+
+        // Set page title
+        if (document.title !== id.name) {
+            document.title = id.name;
+        }
+
+        // Instantiate widget
         let widget = null
         function init() {
             // debit card
-            if (window.Wyre !== undefined && context.active) {
+            if (window.Wyre !== undefined) {
                 widget = new window.Wyre({
-                    env: 'test',
+                    accountId: accountId,
+                    env: 'prod',
                     operation: {
                         type: 'debitcard',
-                        dest: context.account
+                        dest: dest,
+                        destCurrency: destCurrency,
+                        sourceAmount: sourceAmount,
+                        paymentMethod: paymentMethod
                     }
                 });
         
@@ -103,15 +158,13 @@ function App() {
             <div 
                 className="App"
                 style={{
-                    width: '102%',
-                    height: '102%',
-                    top: '-1',
-                    left: '-1',
-                    overflow: 'scroll',
-                    paddingTop: '100%',
+                    width: '100%',
+                    height: '100%',
+                    position: 'fixed',
+                    overflow: 'hidden',
                     alignItems: 'center',
-                    background: 'url(' + id.background + ')',
-                    filter: 'blur(5px) brightness(0.9)',
+                    backgroundImage: 'url(' + id.background + ')',
+                    filter: filter,
                     backgroundRepeat: 'no-repeat',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center top'
