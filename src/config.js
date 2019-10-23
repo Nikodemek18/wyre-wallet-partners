@@ -62,6 +62,7 @@ export const partners = {
         background: MetaMaskBackground,
         logo: MetaMaskLogo,
         favicon: MetaMaskFavicon,
+        destCurrency: 'ETH,DAI,USDC',
         blurred: true
     },
     trustwallet: {
@@ -78,6 +79,7 @@ export const partners = {
         background: PortisBackground,
         logo: PortisLogo,
         favicon: PortisFavicon,
+        destCurrency: 'ETH,DAI,USDC',
         blurred: true
     },
     fortmatic: {
@@ -86,6 +88,7 @@ export const partners = {
         background: FortmaticBackground,
         logo: FortmaticLogo,
         favicon: FortmaticFavicon,
+        destCurrency: 'ETH,DAI,USDC',
         blurred: true
     },
     binance: {
@@ -108,6 +111,7 @@ export const partners = {
         background: CompoundFinanceBackground,
         logo: CompoundFinanceLogo,
         favicon: CompoundFinanceFavicon,
+        destCurrency: 'ETH,DAI,USDC',
         blurred: true
     },
     celsius: {
@@ -115,7 +119,7 @@ export const partners = {
         background: CelsiusBackground,
         logo: CelsiusLogo,
         favicon: CelsiusFavicon,
-        destCurrency: 'BTC',
+        destCurrency: 'USDC,ETH,DAI,BTC',
         blurred: false  
     },
     joule: {
@@ -131,7 +135,7 @@ export const partners = {
         background: OpenSeaBackground,
         logo: OpenSeaLogo,
         favicon: OpenSeaFavicon,
-        destCurrency: "ETH", // Optional. Locks in a currency for purchase. Options are 'BTC', 'ETH', 'DAI', or 'USDC'
+        destCurrency: "ETH",
         blurred: false
     }
 }
