@@ -7,11 +7,16 @@ import {useScript} from './../Hooks'
 function App() {
     const verifyScriptUrl = 'https://verify.sendwyre.com/js/verify-module-init-beta.js'
 
+    const stripeScriptUrl = 'https://js.stripe.com/v3/'
+
     const[id, setId] = useState({})
     const context = useWeb3Context()
     const [loaded, error] = useScript(
         verifyScriptUrl
     );
+    const [stripeLoaded, stripeError] = useScript(
+        stripeScriptUrl
+    )
 
     let filter
     if (id.blurred) {
@@ -128,7 +133,7 @@ function App() {
             }
         }
         init()
-    }, [loaded, error, context])
+    }, [loaded, error, context, stripeLoaded, stripeLoaded])
 
     // **HERE - trying to get the logo into the widget** 
     const classes = {
